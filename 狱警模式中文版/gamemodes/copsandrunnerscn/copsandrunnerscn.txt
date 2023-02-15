@@ -1,0 +1,133 @@
+"copsandrunners"
+{
+	"base"		"base"
+	"title"		"狱警模式"
+	"maps"		""
+	"menusystem"	"1"
+	"workshopid"	"2889955037"
+	
+		"settings"
+	{
+		1
+		{
+			"name"		"cnr_instafree"
+			"text"		"Instantly Free Jailed Runners"
+			"help"		"Disables the damage, and returns it to become instantly free like before 1.1"
+			"type"		"CheckBox"
+			"default"	"0"
+		}
+
+		
+		4
+		{
+			"name"		"cnr_coppercentage"
+			"text"		"Percentage of Cops (decimal)"
+			"help"		"The percentage of players to become Cops. This number is always reduced by 1 for the Warden."
+			"type"		"Numeric"
+			"default"	"0.2"
+		}
+		
+		2
+		{
+			"name"		"cnr_timelimit"
+			"text"		"Time Limit (seconds)"
+			"help"		"The amount of time a round lasts, excluding prep time and post-round time"
+			"type"		"Numeric"
+			"default"	"180"
+		}
+
+		5
+		{
+			"name"		"cnr_armedrunners"	
+			"text"		"Amount of Armed Runners"
+			"help"		"Sets the amount of Armed Runners in total. Not dependant on amount of players"
+			"type"		"Numeric"
+			"default"	"1"
+		}
+
+		3
+		{
+			"name"		"cnr_postroundtime"
+			"text"		"Post round time (seconds)"
+			"help"		"The amount of time the round waits before resetting. Also the time you can kill the loosers in"
+			"type"		"Numeric"
+			"default"	"10"
+		}
+		
+		6
+		{
+			"name"		"cnr_speedmultiplier"
+			"text"		"Speed Multiplier"
+			"help"		"A multiplier that applies to all speeds"
+			"type"		"Numeric"
+			"default"	"1"
+		}
+		
+		7
+		{
+			"name"		"cnr_smokedelay"
+			"text"		"Smoke Grenade Spawn time"
+			"help"		"Amount of time it takes to spawn a Smoke Grenade from the Smoke Spawn Point"
+			"type"		"Numeric"
+			"default"	"15"
+		}
+		
+		8
+		{
+			"name"		"cnr_crowdamage"
+			"text"		"Crowbar Freeing Damage"
+			"help"		"Amount of damage the Crowbar does to help free a jailed player"
+			"type"		"Numeric"
+			"default"	"20"
+		}
+		
+		9
+		{
+			"name"		"cnr_preptime"
+			"text"		"Preparation Phase"
+			"help"		"The amount of time before a round has fully begun. Jail cannot be placed during this time, and the clock doesn't count"
+			"type"		"Numeric"
+			"default"	"15"
+		}
+		
+		10
+		{
+			"name"		"cnr_copextraspeed"
+			"text"		"Cops extra Speed (decimal)"
+			"help"		"A multiplier that applies to all cops, compared to the Runners HANDS speed"
+			"type"		"Numeric"
+			"default"	"1.1"
+		}
+
+		11
+		{
+			"name"		"cnr_wardenafk"
+			"text"		"AFK Warden Reset Time"
+			"help"		"The amount of time the Warden has to move before having the round restart on him"
+			"type"		"Numeric"
+			"default"	"20"
+		}
+
+		12
+		{
+			"name"		"cnr_jailmindist"
+			"text"		"Jail Stun Speed Fade Min"
+			"help"		"The minimum distance from jail where the stunstick begins to fade into faster speeds. Set above maximum to disable"
+			"type"		"Numeric"
+			"default"	"1000"
+		}
+		
+		13
+		{
+			"name"		"cnr_jailmaxdist"
+			"text"		"Jail Stun Speed Fade Max"
+			"help"		"The maximum distance from jail where full swing speed is achieved. Set under minimum to disable."
+			"type"		"Numeric"
+			"default"	"2000"
+		}
+		
+
+
+	}
+}
+

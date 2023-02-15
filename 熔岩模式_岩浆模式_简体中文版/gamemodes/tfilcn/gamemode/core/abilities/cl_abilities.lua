@@ -1,0 +1,93 @@
+local draw = draw
+local pColor = pColor
+
+local function CreateAbilitiesPanel()
+	local AbilitiesCount = {}
+
+	local x = InitializePanel("LavaAbiltiesSelector", "DPanel")
+	x:SetSize(ScrW() / 3, ScrH() * 0.87)
+	x:MakePopup()
+	x:Center()
+
+	x.Paint = function(s, w, h)
+		draw.RoundedBox(0, 0, 0, w, h, pColor() - 100)
+	end
+
+	local m = x:Add("DPanel")
+	m:Dock(FILL)
+	m:DockMargin(WebElements.Edge, WebElements.Edge, WebElements.Edge, WebElements.Edge)
+
+	m.Paint = function(s, w, h)
+		draw.RoundedBox(0, 0, 0, w, h, pColor())
+	end
+
+	local s = m:Add"lava_scroller"
+	s:Dock(FILL)
+	s:SetHeight(ScrH() / 2)
+
+	local r = x:Add("RichText")
+	r:Dock(BOTTOM)
+	r:DockMargin( WebElements.Edge,WebElements.Edge,WebElements.Edge * 5,WebElements.Edge)
+	r:SetVerticalScrollbarEnabled(false)
+	r:SetMouseInputEnabled(false)
+	r:SetTall(ScrH() / 5)
+
+	r.Paint = function(s, w, h)
+		s.m_FontName = "lava_abilities_desc"
+		s:SetFGColor(color_white)
+		s:SetFontInternal("lava_abilities_desc")
+		s.Paint = nil
+	end
+
+	for k, v in SortedPairs(Abilities.Skills) do
+		local c = s:Add("DButton")
+		c:Dock(TOP)
+		c:SetTall(ScrH() / 10)
+		c:SetText(k)
+		c:SetFont("lava_abilities_header")
+		c:SetContentAlignment(4)
+		c:SetTextInset(ScrH() / 10, 0)
+		c:SetTextColor(color_white)
+		c.Count = 0
+		c:GenerateColorShift("HoverVar", pColor():Alpha(50), pColor():Alpha(200) + 50, 255 * 3)
+		c:MakeBorder(WebElements.Edge / 3, pColor() - 100)
+		local text = v[1]:gsub("\t", "" ):gsub("\n", " "):gsub("%s%s", " ")
+
+		c.Paint = function(s, w, h)
+			draw.RoundedBox(0, 0, 0, w, h, s.HoverVar)
+			draw.WebImage(Emoji.Get(v[2]), h / 10, h / 10, h - h / 5, h - h / 5, nil, s.Hovered and CurTime():sin() * 50, true)
+
+			if s.Hovered and r.Val ~= text then
+				r.Val = text
+				r:SetText("\t" .. text)
+			end
+
+			if s.Count == 0 then return end
+
+			local nTab = Emoji.ParseNumber( #tostring( s.Count ) > 1 and s.Count or "0" .. s.Count )
+
+			for index, element in pairs( nTab ) do
+				draw.WebImage( Emoji.Get( element ), w - h * 1.5 + index * h/2, h/2, h/2, h/2, nil, 0 )
+			end
+		end
+
+		c.DoClick = function()
+			chat.AddText(pColor(), "你选择了 " .. k .. " 作为你的能力!" .. (Rounds.IsState("Preround") and "" or " 能力将在下次重生后生效！"))
+			net.Start("Lava.SelectAbility")
+			net.WriteString(k)
+			net.SendToServer()
+		end
+
+		AbilitiesCount[ k ] = c
+	end
+
+	for Player in Values( player.GetAll() ) do
+		if not IsValid( AbilitiesCount[ Player:GetAbility() ] ) then continue end
+		AbilitiesCount[ Player:GetAbility() ].Count = AbilitiesCount[ Player:GetAbility() ].Count + 1
+	end
+	return x
+end
+
+hook.Add("Lava.PopulateWidgetMenu", "CreateAbilitiesWidget", function(Context)
+	Context.NewWidget("能力", "1f441-200d-1f5e8", CreateAbilitiesPanel)
+end)

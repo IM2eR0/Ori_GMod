@@ -1,0 +1,1 @@
+Mutators.RegisterNewEvent("幻彩视觉", "头晕目眩眼花缭乱，Emoji似乎爱上你了.", function() end, function() end)

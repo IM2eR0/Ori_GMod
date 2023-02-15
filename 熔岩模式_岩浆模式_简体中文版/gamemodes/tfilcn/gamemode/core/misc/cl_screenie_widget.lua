@@ -1,0 +1,13 @@
+local m_DisableRenderHUD
+
+hook.Add("Lava.PopulateWidgetMenu", "CreateScreenshotPane", function( Context )
+	Context.NewWidget( "拍摄模式", "1f3a5", function()
+		m_DisableRenderHUD = not m_DisableRenderHUD
+	end)
+end)
+
+hook.Add( "HUDShouldDraw", "ScreenshotPane", function( name )
+	if m_DisableRenderHUD and ( name == "CHudGMod" or name == "CHudChat") then
+		return false
+	end
+end)

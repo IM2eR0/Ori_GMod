@@ -1,0 +1,9 @@
+"tfilcn"
+{
+	"base"		"base"
+	"title"		"熔岩逃生"
+	"category"	"pvp"
+	"maps"		"lava_*"
+	"menusystem"	"1"
+	"workshopid"	"2777831173"
+}

@@ -1,0 +1,5 @@
+Msg("cl_init.lua loads!")
+include( "shared.lua" )
+include( "cl_hud.lua" )
+include( "countdown.lua" )
+Msg("cl_init.lua has loaded all the way through!")
